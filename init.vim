@@ -83,6 +83,9 @@ Plug 'lilydjwg/colorizer'
 " Comment stuff out.
 Plug 'tpope/vim-commentary'
 
+" The fancy start screen for Vim.
+Plug 'mhinz/vim-startify'
+
 " Emmet - support for expanding abbreviations
 Plug 'mattn/emmet-vim'
 let g:user_emmet_mode='a'    "enable all function in all mode.
@@ -98,7 +101,7 @@ let NERDTreeStatusLine='NERDTree'
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
-nnoremap <silent> <C-a> :NERDTreeToggle<CR>
+nnoremap <silent> <F7> :NERDTreeToggle<CR>
 
 " Airline - A configurable statusline
 Plug 'vim-airline/vim-airline'
