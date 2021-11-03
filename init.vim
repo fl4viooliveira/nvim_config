@@ -21,7 +21,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Wakatime
 Plug 'wakatime/vim-wakatime'
 
-" Git Integration:
+" Git Integration
 Plug 'tpope/vim-fugitive'
 
 " ALE (Asynchronous Lint Engine)
@@ -61,11 +61,14 @@ Plug 'airblade/vim-gitgutter'
 " Vim Polyglot - collection of language packs for Vim
 Plug 'sheerun/vim-polyglot'
 
+" This plugin adds Go language support for Vim
+Plug 'fatih/vim-go'
+
 " vim-grammarous is a powerful grammar checker for Vim. 
 Plug 'rhysd/vim-grammarous'
-nmap <F10> :GrammarousCheck<CR>
+nmap <F6> :GrammarousCheck<CR>
  
-" Auto Pairs - Insert or delete brackets, parens, quotes in pairs.
+" Auto Pairs - Insert or delete brackets, parents, quotes in pairs.
 Plug 'jiangmiao/auto-pairs'
 
 " This plugin is used for displaying thin vertical lines at each indentation level
@@ -111,6 +114,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim' 
 Plug 'dracula/vim'
 Plug 'ghifarit53/tokyonight-vim'
+
+" Copilot
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -202,7 +208,10 @@ syntax enable
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
-colorscheme tokyonight
+" colorscheme tokyonight
+
+colorscheme dracula
+
 set background=dark
 
 set backupcopy=yes
