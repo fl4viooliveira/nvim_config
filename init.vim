@@ -46,7 +46,15 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'yannickcr/eslint-plugin-react'
 
 " Prettier settings 
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+let g:prettier#autoformat = 0
+if filereadable(findfile('.prettierrc.js', '.;'))
+  echo "Using prettier..."
+  autocmd BufWritePre *.js,*.jsx,*mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+endif
+
 
 " A completion plugin for neovim coded in Lua.    
 Plug 'neovim/nvim-lspconfig'
@@ -212,6 +220,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Nvim LSP - language server protocol
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim'
+
+nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 
 " telescope - a vim plugin for searching the local file system
 Plug 'nvim-lua/plenary.nvim'
@@ -332,7 +343,7 @@ lua <<EOF
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
+  sources = cmp.config.sources({
       { name = 'path' }
     }, {
       { name = 'cmdline' }
@@ -373,6 +384,8 @@ autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
+local saga = require 'lspsaga'
+saga.init_lsp_saga() 
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -409,7 +422,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'rust_analyzer', }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -421,9 +434,9 @@ end
 EOF
 
 "-- Setup Lualine ----------------------------------------------------------------------------------
-lua << END
+lua << EOF
 require'lualine'.setup()
-END
+EOF
 
 "-- Setup Bufferline --------------------------------------------------------------------------------
 " In your init.lua or init.vim
@@ -440,3 +453,7 @@ require'nvim-tree'.setup {
   }
 
 EOF
+
+"-- Setup LSP-eslint ----------------------------------------------------------------------------------
+
+
