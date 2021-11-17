@@ -23,7 +23,12 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'wakatime/vim-wakatime'
 
 " Git Integration
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
+
+"source ~/.config/nvim/plug-config/signify.vim
 
 " ALE (Asynchronous Lint Engine)
 Plug 'w0rp/ale'
